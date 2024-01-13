@@ -1,0 +1,37 @@
+% Bayan Alsalem
+% 40105034
+
+
+% Define the values for n
+n = 0:9;
+
+% Define the input signal 𝑥[𝑛] = sin((2𝜋/10)𝑛)
+x = sin((2*pi/10)*𝑛);
+
+% Define the output signal y[n] = (x[n])^2
+y = x.^2;
+
+% Plot the input signal
+subplot(2, 1, 1);
+stem(n, x, 'b', 'LineWidth', 1.5);
+title('Input Signal x[n]');
+xlabel('n');
+ylabel('x[n]');
+
+% Plot the output signal
+subplot(2, 1, 2);
+stem(n, y, 'r', 'LineWidth', 1.5);
+title('Output Signal y[n]');
+xlabel('n');
+ylabel('y[n]');
+
+% Compute the squared values of x[n] and y[n]
+x_squared=x.^2;
+y_squared=y.^2;
+
+% Compute and display the total energy in x[n] and y[n]
+energy_x = sum(x_squared);
+energy_y = sum(y_squared);
+
+disp(['Total energy in x[n]: ' num2str(energy_x)]);
+disp(['Total energy in y[n]: ' num2str(energy_y)]);

@@ -1,0 +1,37 @@
+% Bayan Alsalem
+% 40105034
+
+% Define input vectors
+x1 = [1,1,3];
+x2 = [1,1,1,1];
+
+y1 = Sys1(x1);
+y2 = Sys1(x2);
+
+% Define shifted input vectors
+x1_shifted = [1,1,1,3];
+x2_shifted = [1,1,1,1,1];
+
+y1_shifted = Sys1(x1_shifted);
+y2_shifted = Sys1(x2_shifted);
+
+% Create subplots
+figure;
+
+% Original input and output subplot
+subplot(2, 2, 1);
+stem( y1, 'r', 'filled');
+title('Original Input x1 and Output y1');
+
+subplot(2, 2, 2);
+stem(y2, 'b', 'filled');
+title('Original Input x2 and Output y2');
+
+% Shifted input and output subplot
+subplot(2, 2, 3);
+stem(y1_shifted, 'g', 'filled');
+title('Shifted Input x1_shifted and Output y1_shifted');
+
+subplot(2, 2, 4);
+stem(y2_shifted, 'm', 'filled');
+title('Shifted Input x2_shifted and Output y2_shifted');

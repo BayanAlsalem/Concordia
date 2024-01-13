@@ -1,0 +1,40 @@
+% Bayan Alsalem
+% ID: 40105034
+
+
+% Define the length of the sequence
+n = 0:9;
+
+% Define the input signal x
+x = zeros(1,10);
+x(2) = 1;
+x(3) = 1;
+x(4) = 1;
+
+% Compute the output signal y using the difference equation
+for i = 1:length(n)
+    if i == 1
+        y(i) = x(i); % Since y[-1] is undefined, set y[0] to x[0]
+    else
+        y(i) = x(i) + (1/4) * y(i-1);
+    end
+end
+
+% Display the output signal y
+disp('Output signal y[n]:');
+disp(y);
+
+% Plot the input and output signals
+subplot(2,1,1);
+stem(n, x, 'r', 'filled');
+title('Input Signal x[n]');
+xlabel('n');
+ylabel('x[n]');
+grid on;
+
+subplot(2,1,2);
+stem(n, y, 'b', 'filled');
+title('Output Signal y[n]');
+xlabel('n');
+ylabel('y[n]');
+grid on;

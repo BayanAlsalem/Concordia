@@ -1,0 +1,43 @@
+% Bayan Alsalem
+% ID: 40105034
+% Define the range of values for n
+n = -5:5;  % Adjust the range to -5 to 5
+
+% Define the signal x[n]
+x = (-1).^(n - 1);  % Updated signal definition
+
+% Define the mirror image x[-n]
+n_mirror = -flip(n);
+x_mirror = (-1).^(n_mirror - 1);  % Updated signal definition
+
+% Compute even and odd components
+x_even = 0.5 * (x + flip(x));  % Even component
+x_odd = 0.5 * (x - flip(x));   % Odd component
+
+% Create the plot for x[n], x[-n], even, and odd components
+figure;
+
+subplot(2, 2, 1); % Two rows, two columns, this is the first subplot
+stem(n, x, 'r', 'LineWidth', 1.5);
+title('Signal x[n]');
+xlabel('n');
+ylabel('Amplitude');
+
+subplot(2, 2, 2); % Second subplot
+stem(n_mirror, x_mirror, 'b', 'LineWidth', 1.5);
+title('Mirror Image x[-n]');
+xlabel('-n');
+ylabel('Amplitude');
+
+subplot(2, 2, 3); % Third subplot
+stem(n, x_even, 'g', 'LineWidth', 1.5);
+title('Even Component');
+xlabel('n');
+ylabel('Amplitude');
+subplot(2, 2, 4); % Fourth subplot
+stem(n, x_odd, 'm', 'LineWidth', 1.5);
+title('Odd Component');
+xlabel('n');
+ylabel('Amplitude');
+% Adjust the plot layout
+suptitle('Signal, Mirror Image, Even and Odd Components');

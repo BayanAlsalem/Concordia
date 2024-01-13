@@ -1,0 +1,128 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define the range of values for n
+n = 0:10;
+
+% Define the input signals for part a
+x1 = sin((2 * pi / 10) * n);  % Input signal x1[n]
+x2 = cos((2 * pi / 10) * n);  % Input signal x2[n]
+
+% Compute the responses for part a
+y1 = 2 * x1;                 % Response to x1[n]
+y2 = 2 * x2;                 % Response to x2[n]
+x3 = x1 + x2;                % Combined input signal x3[n]
+y3 = 2 * x3;                 % Response to x3[n]
+y4 = y1 + y2;                % Combined response based on linearity
+
+% Plot all input and output signals in one graph for part a
+figure;
+
+subplot(2, 1, 1);
+stem(n, [x1; y1; x2; y2; x3; y3; y4]', 'LineWidth', 1.5);
+title('Part (a) - Input and Output Signals');
+xlabel('n');
+ylabel('Amplitude');
+grid on;
+legend('x1[n]', 'y1[n]', 'x2[n]', 'y2[n]', 'x3[n]', 'y3[n]', 'y4[n]');
+
+% Check linearity for part a
+if isequal(y4, y3)
+    disp('Part (a): The system has outputs consistent with a linear system.');
+else
+    disp('Part (a): The system is not linear.');
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Define the input signal for part b i
+n1 = 0:1;
+x1_b = n1;
+y5 = x1_b.^2;                % Response to x1_b[n]
+
+% Define the input signal for part b ii
+n2 = 0:10;
+x2_b = n2;
+y6 = 2 * x2_b + 5 * (n2 == 0);  % Response to x2_b[n] with δ[n]
+
+
+
+% Define the interval for the (larger) set of values for part b
+n_large = 0:20;
+
+% Define the input signal for part b i
+x1_large = n_large;
+y5_large = x1_large.^2;  % Response to x1_large[n]
+
+% Define the input signal for part b ii
+x2_large = n_large;
+y6_large = 2 * x2_large + 5 * (n_large == 0);  % Response to x2_large[n] with δ[n]
+
+
+
+% Check linearity for part b i
+if isequal(y5, y5_large)
+    disp('Part (b i): The system is linear');
+else
+    disp('Part (b i): The system is not linear');
+end
+
+% Check linearity for part b ii
+if isequal(y6, y6_large)
+    disp('Part (b ii): The system is linear');
+else
+    disp('Part (b ii): The system is not linear');
+end
+
+
+
+% Define the input signal for part b i with a time shift
+n1_shifted = n1 - 1;
+y5_shifted = n1_shifted.^2;
+
+% Compare the output response to the shifted input for part b i
+if isequal(y5, y5_shifted)
+    disp('Part (b i): The system is time-invariant.');
+else
+    disp('Part (b i): The system is not time-invariant / time-variant.');
+end
+
+
+% Define the input signal for part b ii with a time shift
+n2_shifted = n2 - 1;
+y6_shifted = 2 * n2_shifted + 5 * (n2_shifted == 0);
+
+% Compare the output response to the shifted input for part b ii
+if isequal(y6, y6_shifted)
+    disp('Part (b ii): The system is time-invariant.');
+else
+    disp('Part (b ii): The system is time-variant.');
+end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Plot all input and output signals in one graph for part b
+figure;
+
+subplot(2, 1, 1);
+stem(n1, [x1_b; y5]', 'LineWidth', 1.5);
+hold on;
+stem(n_large, [x1_large; y5_large]', 'r', 'LineWidth', 1.5);
+title('Part (b) - Input and Output Signals (i)');
+xlabel('n');
+ylabel('Amplitude');
+grid on;
+legend('x1[n]', 'y5[n] for x[n] = [0, 1]', 'y5[n] for larger x[n]');
+
+subplot(2, 1, 2);
+stem(n2, [x2_b; y6]', 'LineWidth', 1.5);
+hold on;
+stem(n_large, [x2_large; y6_large]', 'r', 'LineWidth', 1.5);
+title('Part (b) - Input and Output Signals (ii)');
+xlabel('n');
+ylabel('Amplitude');
+grid on;
+legend('x2[n]', 'y6[n] for x[n] = [0, 1]', 'y6[n] for larger x[n]');
+

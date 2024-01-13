@@ -1,0 +1,172 @@
+% Bayan Alsalem
+% 40105034
+
+% Define the range of values for n
+n = 0:10;
+
+% Define the input signals
+x1 = sin((2 * pi / 10) * n);  % Input signal x1[n]
+x2 = cos((2 * pi / 10) * n);  % Input signal x2[n]
+
+% Compute the responses
+y1 = 2 * x1;                 % Response to x1[n]
+y2 = 2 * x2;                 % Response to x2[n]
+
+x3 = x1 + x2;                % Combined input signal x3[n]
+y3 = 2 * x3;                 % Response to x3[n]
+
+y4 = y1 + y2;                % Combined response based on linearity
+
+% Check linearity and display the result
+if (y4 == y3)
+    disp('Part a: The system has outputs consistent with a linear system.');
+else
+    disp('Part a: The system is not linear.');
+end
+
+%plot the input signals and their corresponding output signals
+%blue = input signal; orange = output signal
+
+subplot (2,2,1)
+stem (n, x1)
+hold on
+stem (n,y1)
+hold off
+title ('Input signal x1[n] and its output signal')
+
+subplot (2,2,2)
+stem (n, x2)
+hold on
+stem (n,y2)
+hold off
+title ('Input signal x2[n] and its output signal')
+
+subplot (2,2,3)
+stem (n, x3)
+hold on
+stem (n,y3)
+hold off
+title ('Input signal x3[n] and its output signal')
+
+subplot (2,2,4)
+stem (n, y4)
+title ('Response y4[n]')
+
+
+
+
+
+% part b - i
+
+
+% Define the interval as the input data x[n]
+n1 = 0:1;
+x1 = n1;
+y5 = x1.^2;
+
+% Compare defined input signal with its output response y[n] with the previous output response y[n]
+if isequal(y5, y4)
+    disp('Part b-i: The system is linear');
+else
+    disp('Part b-i: The system is not linear');
+end
+
+% Test for time-invariant property
+x1_shifted = n1 - 1;
+y5_shifted = x1_shifted.^2;
+
+% Compare both output responses y[n]
+if isequal(y5(1:end-1), y5_shifted(2:end))
+    disp('Part b-i: The system is time-invariant');
+else
+    disp('Part b-i: The system is not time-invariant / time-variant');
+end
+
+
+
+% Test using a larger set of values
+
+% Define the interval
+n2 = 0:10;
+x2 = n2;
+y6 = x2.^2;
+
+% Test for linearity property
+
+if isequal(y5, y6)
+    disp('Part b-i: The system is linear for the larger set of values');
+else
+    disp('Part b-i: The system is not linear for the larger set of values');
+end
+
+% Test for time-invariant property
+
+% Shift the input signal
+x2_shifted = n2 - 1;
+y6_shifted = x2_shifted.^2;
+
+% Compare the output response to the shifted input
+if isequal(y6(1:end-1), y6_shifted(2:end))
+    disp('Part b-i: The system is time-invariant for the larger set of values');
+else
+    disp('Part b-i: The system is time-variant for the larger set of values');
+end
+
+
+% part b - ii
+
+%define the interval
+n3 = 0:10;
+
+%define new input signals x[n]
+x1_ii = sin((2*pi / 10) *n3);
+x2_ii = cos((2*pi / 10) *n3);
+x3_ii = x1_ii + x2_ii;
+
+y1_ii = (2.*x1_ii)+5.*dirac(n3);
+y2_ii = (2.*x2_ii)+5.*dirac(n3);
+y3_ii = (2.*x3_ii)+5.*dirac(n3);
+y4_ii = y1_ii + y2_ii;
+
+
+if (y3_ii == y4_ii)
+    disp ('Part b-ii: The system is linear')
+else
+    disp ('Part b-ii: The system is not linear')
+end
+
+%check for time-invariance
+x4_ii = n3 -1;
+y5_ii = (2.*x4_ii)+5.*dirac(n3);
+
+if ((y4_ii (1:end-1)) == ((y5_ii (2:end))))
+    disp ('Part b-ii: The system is time-invariant')
+else
+    disp ('Part b-ii: The system is time-variant')
+end
+
+
+%test using a larger set of values
+%define interval 
+n4 = 1:11;
+x5_ii = n4;
+y6_ii = (2.*x5_ii)+5.*dirac(n4);
+
+if (y6_ii == y3_ii)
+    disp ('Part b-ii: The system is linear')
+else
+    disp ('Part b-ii: The system is not linear')
+end
+
+x6_ii = n4 -1;
+y7_ii = (2.*x6_ii)+5.*dirac(n4);
+
+if ((y6_ii (1:end-1)) == ((y7_ii (2:end))))
+    disp ('Part b-ii: The system is time-invariant')
+else
+    disp ('Part b-ii: The system is not time-invariant / time-variant')
+end
+
+
+
+

@@ -1,0 +1,30 @@
+% Bayan Alsalem
+% ID: 40105034
+
+% Convolution => x[n] * h[n] = y[n]
+
+% Define the interval
+n = 0:9; 
+
+% Define the input signal x
+x = zeros(1, 10);
+x(2) = 1;
+x(3) = 1;
+x(4) = 1;
+
+% Define the impulse response H
+H = (1/4).^n;
+
+% Compute the convolution of H and x
+y_conv = conv(x, H);
+
+% Create a time axis for the response
+n_response = 0:length(y_conv)-1;
+
+% Plot the response using stem
+figure;
+stem(n_response, y_conv, 'r', 'filled');
+title('System Response Using Convolution');
+xlabel('n');
+ylabel('y[n]');
+grid on;
