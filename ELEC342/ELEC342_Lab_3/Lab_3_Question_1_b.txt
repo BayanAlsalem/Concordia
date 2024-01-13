@@ -1,0 +1,61 @@
+% Bayan Alsalem
+% ID: 40105034
+
+
+%define global variable
+global w;
+
+%input number of periods and step size
+samp = input('Enter the sampling rate in terms of Nyquist Rate: ');
+
+%keep the step size fixed at 0.05
+step_size = 0.05; 
+
+%define w array
+w = [-pi: step_size: pi];
+
+%define for-loop statements
+for index = 1 : 5
+    N = input('Enter the window size: '); 
+    
+    %determines the total num. of samples for inputted sampling rate
+    n = 0: N * samp - 1; 
+    
+    %define input signal x[n]
+    xn = sin ( (2 * pi / N) * n);
+    xn2 = fft_l(xn,n);
+    
+    %plot signal over defined window size
+     figure %plots multiple graphs in separate windwows
+     subplot (2,2,1)
+     stem(floor(n),xn)
+     title('Signal over window size')
+     xlabel('n')
+     ylabel('x[n]')
+     
+    %plot transform of signal
+    subplot (2,2,3)
+    plot(w,abs(xn2))
+    title('Transform of signal xn2')
+    xlabel('w')
+    ylabel('X[jw]')
+    
+end
+
+
+
+function [FW] = fft_l(x,n)
+global w
+
+%define the corresponding signal again with array
+FW = zeros(1,length(w));
+
+for a = (1:length(w))
+    sum = 0;
+    for b = (1:length(x))
+      sum = sum + x(b) * exp((-1*j)*(w(a))*(n(b)));
+    end
+    FW (1,a) = sum;
+end
+
+end

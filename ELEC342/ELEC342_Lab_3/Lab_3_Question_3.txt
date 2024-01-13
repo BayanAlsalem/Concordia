@@ -1,0 +1,61 @@
+% Bayan Alsalem
+% ID: 40105034
+
+% Part a
+% Load two files: Original.wav and Distorted.wav to your program and plot
+% them in time domain.  
+
+% audioread reads the audio data from the WAV files and stores them in the
+% variable x and y
+% the sample rate is stored in Fs and the Sampling frequency for recoded
+% audio is usually 22050
+
+[x, Fs] = audioread('Original.wav');
+[y, Fs] = audioread('Distorted.wav');
+
+%plot them in time domain
+subplot (2,2,1)
+plot(x)
+title('Original Signal')
+
+subplot(2,2,2)
+plot(y)
+title('Distorted Signal')
+
+% Part b
+% Use MSE to compare the original signal and the distorted. 
+% Define the mean square error (MSE) function for Original and Distorted
+% signals
+
+MSE = mean ((x - y).^2);
+disp('Comparing the original signal and the distorted produces a value of: ')
+disp(MSE) 
+
+% Part c
+%choose a domain for the design => time domain
+%assume using a low-pass FIR filter with cut off frequency
+fc = 4000; %cutoff freq.
+N = 101; %filer length of N samples
+% h represents the coefficients of a low-pass 
+% Finite Impulse Response (FIR) filter
+h = fir1(N-1, fc/(Fs/2));
+
+% Apply filter to distorted signal
+filtered = filter(h, 1, y);
+
+% Save recovered signal in a file
+audiowrite('Recovered.wav', filtered, Fs);
+
+% Part d
+% Compute the MSE between the recovered signal and the original signal
+MSE2 = mean ((x - filtered).^2);
+disp('Comparing the original and the recovered signals produces a value of: ')
+disp(MSE2)
+
+
+
+
+
+
+
+

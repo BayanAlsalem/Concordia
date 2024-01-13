@@ -1,0 +1,71 @@
+% Bayan Alsalem
+% ID: 40105034
+
+% Ask the user for the number of periods
+num_periods = input('Please enter the number of periods: ');
+
+% Ask the user for the step size of the frequency interval
+step_size = input('Please enter the step size of the frequency interval: ');
+
+% Declare w as a global variable and Calculate the frequency array w
+global w;
+w = [-num_periods*pi:step_size:num_periods*pi];
+
+
+
+for loop = 1:5
+    % Ask the user for the sampling rate factor
+    sampling_rate_factor = input('Enter the sampling rate factor (e.g., 2, 3.6, etc.): ');
+
+    % Compute N (number of samples in one period)
+    N = compute_N(sampling_rate_factor);
+
+    % Compute n (total number of samples needed to store two complete periods)
+    n = 2 * N;
+
+    % Generate the signal x[n]
+    n_values = 0:n-1;
+    x = sin(2*pi/N * n_values);
+
+    % Plot the signal over two complete periods
+    subplot(2, 1, 1);
+    stem(n_values, x);
+    title('Sampled Signal');
+    xlabel('n');
+    ylabel('x[n]');
+    xlim([0, n-1]);
+
+    % Compute the Discrete Time Fourier Transform (DTFT) of the signal
+    X = dtft(x);
+
+    % Plot the DTFT of the signal
+    subplot(2, 1, 2);
+    plot(w, abs(X));
+    title('DTFT of Sampled Signal');
+    xlabel('Frequency (radians/sample)');
+    ylabel('|X(w)|');
+
+    % Pause to view the plots
+    pause;
+
+    % Clear the current figure for the next iteration
+    clf;
+end
+
+
+% Define and declare functions
+
+% A function to compute N based on the sampling rate factor
+function N = compute_N(sampling_rate_factor)
+    Nyquist_rate = 2; % Nyquist rate is 2 times
+    N = floor(Nyquist_rate * sampling_rate_factor);
+end
+
+function X = dtft(x)
+    % Compute the Discrete Time Fourier Transform (DTFT) of the signal x[n]
+    global w;
+    X = zeros(size(w));
+    for k = 1:length(w)
+        X(k) = sum(x .* exp(-1j * w(k) * (0:length(x)-1)));
+    end
+end

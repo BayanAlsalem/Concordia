@@ -1,0 +1,65 @@
+% Bayan Alsalem
+% ID: 40105034
+
+%define global variable
+global w;
+
+%input number of periods and step size
+num_period = input('Enter the number of periods: ');
+step_size = input('Enter the step size of the frequency interval: ');
+
+%define w array
+w = [-num_period * pi: step_size: num_period * pi];
+
+%define for-loop statements
+for loop = 1 : 5
+    
+    %gets the sampling rate
+    N = input('Enter the sampling rate: '); 
+    
+    %determines the total num. of samples for 2 periods
+    n = 0: 2 * N - 1; 
+    
+    %define input signal
+    xn = 0.5*sin(2*pi/N * n) + 0.33* sin(4*pi/N*n);
+    
+    %passing x as an argument to the function
+    xn2 = fft_l(xn,n); 
+    
+    %plot signal over two complete periods
+     figure %plots multiple graphs in separate windwows
+     subplot (2,2,1)
+     stem(floor(n),xn)
+     title('Signal over two complete periods')
+     xlabel('n')
+     ylabel('x[n]')
+     
+     x_rectified = abs(xn2);
+     
+    %plot transform of signal
+    %using polar plots
+    subplot (2,2,3)
+    polar(w,x_rectified)
+    title('Transform of signal xn2')
+    xlabel('w')
+    ylabel('X[jw]')
+end
+
+
+%define the code in Lab 3 receiving signal x(n) 
+%returning the DTFT of the signal
+function [FW] = fft_l(x,n)
+global w
+
+%define the corresponding signal again with array
+FW = zeros(1,length(w));
+
+for a = (1:length(w))
+    sum = 0;
+    for b = (1:length(x))
+      sum = sum + x(b) * exp((-1*j)*(w(a))*(n(b)));
+    end
+    FW (1,a) = sum;
+end
+
+end
