@@ -1,0 +1,41 @@
+% Bayan Alsalem
+% ID: 40105034
+
+% Define the time domain (-10 to 10)
+n = -10:10;
+
+% Initialize the frequency domain
+w = 0:2*pi/21:2*pi-2*pi/21;  % User-defined step size to make the length 21
+
+% Define the pulse signal x[n] (input signal)
+x = zeros(size(n));        % Initialize x[n] with zeros
+x(n >= -2 & n <= 2) = 1;   % Set x[n] to 1 where specified
+
+
+% Compute the FFT of the input signal x[n]
+X_fft = fft(x);
+
+% Compute the IDFT to obtain the original signal x[n]
+x_inverse = ifft(X_fft);
+
+% Plot the original signal x[n]
+subplot(3, 1, 1);
+stem(n, x, 'b', 'filled');
+title('Original Signal x[n]');
+xlabel('n');
+ylabel('x[n]');
+
+% Plot FFT of the input signal x[n]
+subplot(3, 1, 2);
+plot(w, abs(X_fft), 'g');
+title('Magnitude of DTFT');
+xlabel('Frequency (w)');
+ylabel('Magnitude');
+grid on;
+
+% Plot the inverse signal obtained from ifft
+subplot(3, 1, 3);
+stem(w, abs(x_inverse), 'r','filled');  
+title('Inverse Signal (from ifft)'); 
+xlabel('Frequency (w)');
+ylabel('Inverse x[n]');  

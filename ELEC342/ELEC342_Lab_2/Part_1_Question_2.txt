@@ -1,0 +1,53 @@
+% Bayan Alsalem
+% ID: 40105034
+
+% Define the time domain (-10 to 10)
+n = -10:10;
+
+% Initialize the frequency domain
+w = 0:2*pi/21:2*pi-2*pi/21;  % User-defined step size to make the length 21
+
+% Define the pulse signal x[n] (input signal)
+x = zeros(size(n));        % Initialize x[n] with zeros
+x(n >= -2 & n <= 2) = 1;   % Set x[n] to 1 where specified
+
+% Create a figure
+figure;
+
+% Plot the signal x[n] in the first subplot
+subplot(2, 1, 1);
+stem(n, x, 'b', 'filled');
+title('Signal x[n]');
+xlabel('n');
+ylabel('x[n]');
+
+% Initialize the DTFT result
+Xw = zeros(size(w));
+
+% Compute the DTFT manually
+for index_w = 1:length(w)
+    sum = 0;
+    for index_n = 1:length(n)
+        sum = sum + (x(index_n) * exp(-1i * w(index_w) * n(index_n)));
+    end
+    Xw(index_w) = sum;
+end
+
+% Plot the DTFT magnitude using plot
+subplot(2, 1, 1);
+plot(w, abs(Xw), 'r', 'LineWidth', 2);
+title('Magnitude of DTFT');
+xlabel('Frequency (w)');
+ylabel('Magnitude');
+grid on;
+
+% Compute the DTFT using MATLAB's fft
+Xw_fft = fft(x);
+
+% Plot the magnitude of DTFT in the second subplot
+subplot(2, 1, 2);
+plot(w, abs(Xw_fft), 'b', 'LineWidth', 2);
+title('Magnitude of DTFT (MATLAB fft)');
+xlabel('Frequency (w)');
+ylabel('Magnitude');
+grid on;
