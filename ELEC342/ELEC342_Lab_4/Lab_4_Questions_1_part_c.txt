@@ -1,0 +1,107 @@
+# Bayan Alsalem
+# 40105034
+
+
+
+fs=6000; % sampling frequency
+time=1;
+t=0:1/fs:time-1/fs;
+R=(-time*fs/2:(time*fs)/2-1)/(time*fs);
+ 
+x=sin(100*t) + sin(2000*t) + sin(6000*t);% function given
+x_fft=fft(x,fs); % using Fourier transform function
+x_fft=fftshift(x_fft); % using Fourier transform function
+% create 3 row, 1 columns, and set the figure in the top left box 
+subplot(3,1,1);
+plot(t,x);
+% to label the x-axis with the specified string
+xlabel('t');
+% to label the y-axis with the specified string
+ylabel('x[t]');
+% title of the graph
+title('Input Signal to be filtered name:id');
+% create 3 row, 1 columns, and set the figure in the top right box 
+subplot(3,1,2);
+plot(t(1:150),x(1:150));
+% title of the graph
+title('First 150 samples');
+% create 3 row, 1 columns, and set the figure in the middle left box  
+subplot(3,1,3);
+plot(R,abs(x_fft));
+% to label the x-axis with the specified string 
+xlabel('w');
+% to label the y-axis with the specified string 
+ylabel('Fourier transform magnitude');
+% title of the graph 
+title('Fourier transform plot');
+print('-r500','-dpdf','Lab5_Q1_c_Figure_1'); % printing figure 1
+ 
+% declaring filter's specifications for order 4
+ 
+y=zeros(2,length(x)); % using zeros funtion for y
+wn=[350/6000,850/6000]; % declaring wn
+Rp=1; % declaring Rp as given in the question
+Rs=60; % declaring Rs as given in the question
+ 
+% using matlab commands to design elliptic filter
+[b,a]=ellip(4,Rp,Rs,wn,'Bandpass');
+ 
+[H,f]=freqz(b,a);
+ 
+y_n=filter(b,a,x);
+y_fft=fft(y_n,fs);
+y_fft=fftshift(y_fft);
+ 
+% figure of the filter's output with order 4
+
+figure;
+% create 2 row, 1 columns, and set the figure in the top left box
+subplot(2,1,1);
+plot(f/pi,abs(H));
+% to label the x-axis with the specified string
+xlabel('frequency in pi');
+% title of the graph
+title('The magnitude response of Elliptic filter with order:4 name:id');
+% create 2 row, 1 columns, and set the figure in the top right box 
+subplot(2,1,2);
+plot(t(1:150),y_n(1:150));
+% title of the graph
+title('output of 150 samples of order:4');
+print('-r500','-dpdf','Lab5_Q1_c_Figure_2'); % printing figure 2
+ 
+% declaring filter's specifications for order 8
+wn1=[450/6000,950/6000];
+Rp=1;
+Rs=60;
+[b,a]=ellip(8,Rp,Rs,wn1,'Bandpass');
+[H,f]=freqz(b,a);
+ 
+y_n1=filter(b,a,x);
+y_fft1=fft(y_n1,fs);
+y_fft1=fftshift(y_fft1);
+ 
+% figure of the filter's output with order 8
+figure;
+% create 3 row, 1 columns, and set the figure in the top left box 
+subplot(3,1,1);
+plot(f/pi,abs(H));
+% to label the x-axis with the specified string
+xlabel('frequency in pi');
+% title of the graph
+title('The magnitude response of Elliptic filter with order:8 name:id');
+% create 2 row, 1 columns, and set the figure in the top left box  
+% create 3 row, 1 columns, and set the figure in the top right box
+subplot(3,1,2);
+plot(t(1:150),y_n1(1:150));
+% title of the graph
+title('First 150 samples of output (order:8)');
+% create 3 row, 1 columns, and set the figure in the middle left box  
+subplot(3,1,3);
+plot(R,abs(y_fft1));
+% to label the y-axis with the specified string
+ylabel('Fourier transform magnitude');
+% title of the graph
+title('Digital Fourier transform of output signal');
+print('-r500','-dpdf','Lab5_Q1_c_Figure_3'); % printing figure 3
+ 
+
