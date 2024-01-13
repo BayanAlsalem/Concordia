@@ -1,0 +1,39 @@
+% Bayan Alsalem
+% ID: 40105034
+
+
+format long
+
+%define the important variables
+n = [0 : 31];
+N1 = 16; 
+
+%defining signals
+x_original = cos( (2*pi)/1024 * n);
+x1 = cos( (2*pi)/N1 * n) - cos( (2*pi)/N1 * (n+1024));
+
+x_pi = cos( (2*3.14)/N1 * n) - cos( (2*3.14)/N1 * (n+1024));
+
+x2 = cos (pi/4* n + pi/3);
+x3 = cos ((9*pi)/4.*n + pi/3);
+
+subplot(5,1,1)
+stem (n, x_original);
+title('Representation of signal x')
+
+subplot (5,1,2)
+stem (n, x1);
+title('Difference of x[1] - x[1+1024]')
+
+subplot (5,1,3)
+stem (n, x_pi);
+title ('Difference of x[1] - x[1+1024] using 3.14 instead of pi')
+
+
+subplot (5,1,4)
+stem (n, x2)
+title('x2 = cos (pi/4* n + pi/3)')
+
+subplot (5,1,5)
+stem (n, x3)
+title('x3 = cos ((9*pi)/4.*n + pi/3)')

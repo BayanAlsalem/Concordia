@@ -1,0 +1,55 @@
+% Bayan Alsalem
+% ID: 40105034
+
+
+
+% Define the range for X_1 and X_2
+X_1 = -5:4; % Range for the left pane
+X_2 = 0:9;  % Range for the right pane
+
+% Create two different row vectors
+% Vector Y_1_left has two elements equal to 1
+Y_1_left = zeros(size(X_1));
+Y_1_left([3, 7]) = 1;
+
+% Vector Y_2_left has the first n elements as 0
+n = 3; % Arbitrary value of n
+Y_2_left = ones(size(X_1));
+Y_2_left(1:n) = 0;
+
+% Vector Y_1_right has two elements equal to 1
+Y_1_right = zeros(size(X_2));
+Y_1_right([3, 8]) = 1;
+
+% Vector Y_2_right has the first element as 0
+Y_2_right = ones(size(X_2));
+Y_2_right(1) = 0;
+
+% Create a figure with two subplots
+figure;
+
+% Left pane
+subplot(2, 2, 1) % Top left subplot
+stem(X_1, Y_1_left, 'r', 'filled')
+title('Y_1 Left')
+xlabel('x')
+ylabel('Value')
+
+subplot(2, 2, 3) % Bottom left subplot
+stem(X_1, Y_2_left, 'b', 'filled')
+title('Y_2 Left')
+xlabel('x')
+ylabel('Value')
+
+% Right pane
+subplot(2, 2, 2) % Top right subplot
+stem(X_2, Y_1_right, 'g', 'filled')
+title('Y_1 Right')
+xlabel('x')
+ylabel('Value')
+
+subplot(2, 2, 4) % Bottom right subplot
+stem(X_2, Y_2_right, 'm', 'filled')
+title('Y_2 Right')
+xlabel('x')
+ylabel('Value')

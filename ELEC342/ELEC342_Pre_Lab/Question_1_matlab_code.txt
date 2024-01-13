@@ -1,0 +1,55 @@
+% Bayan Alsalem
+% ID: 40105034
+
+
+% Create an array of radii from 1 to 10
+radius = 1:10;
+
+% Calculate the volume and surface area of the sphere
+volume_sphere = (4/3) * pi * radius.^3;
+area_sphere = 4 * pi * radius.^2;
+% Create a figure with two subplots, one on the left and one on the right
+figure;
+
+% Plot the volume of the sphere on the left subplot
+subplot(1, 2, 1); % Left subplot
+plot(radius, volume_sphere, 'b', 'LineWidth', 2) % Blue color for volume plot
+hold on; % Use hold on to keep the current plot active
+
+% Plot the surface area of the sphere on the left subplot
+plot(radius, area_sphere, 'r', 'LineWidth', 2) % Red color for surface area plot
+
+% Add labels and a legend to the left subplot
+xlabel('Radius')
+ylabel('Volume and Surface Area')
+title('Sphere: Volume and Surface Area vs. Radius')
+legend('Volume', 'Surface Area')
+grid on;
+
+% Turn off hold to prevent further plots from overlaying on the left subplot
+hold off;
+
+% Create an array of side lengths from 1 to 10
+side_length = 1:10;
+
+% Calculate the volume and surface area of the square 
+volume_square = side_length.^3;
+area_square = 6 * side_length.^2;
+
+% Plot the volume of the square on the right subplot
+subplot(1, 2, 2); % Right subplot
+plot(side_length, volume_square, 'g', 'LineWidth', 2) % Green color for volume plot
+hold on; % Use hold on to keep the current plot active
+
+% Plot the surface area of the square on the right subplot
+plot(side_length, area_square, 'm', 'LineWidth', 2) % Magenta color for surface area plot
+
+% Add labels and a legend to the right subplot
+xlabel('Side Length')
+ylabel('Volume and Surface Area')
+title('Square: Volume and Surface Area vs. Side Length')
+legend('Volume', 'Surface Area')
+grid on;
+% Turn off hold to prevent further plots from overlaying on the right subplot
+hold off;
+

@@ -1,0 +1,10 @@
+% Bayan Alsalem
+% ID: 40105034
+
+clc
+clear all
+close all
+
+%call the load function to read the file my_big_array
+
+my_big_array = load ("my_big_array.txt");
